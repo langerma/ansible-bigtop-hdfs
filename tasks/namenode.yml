@@ -1,0 +1,21 @@
+- name: 'install journalnodes'
+  yum:
+    name: hadoop-hdfs-journalnode
+    state: latest
+  when: '"master" in group_names'
+
+- name: 'install namenode'
+  yum:
+    name: hadoop-hdfs-namenode
+    state: latest
+  when: '"hdfs_namenodes" in group_names'
+
+- name: Create journalnode edits dir
+  file: path={{hdfs_dfs_journalnode_edits_dir}} state=directory owner={{hdfs_user}} group={{hdfs_group}} mode={{ hdfs_dfs_journalnode_edits_dir_perm }}
+  when: '"master" in group_names'
+
+- name: 'install hadoop-hdfs-zkfc'
+  yum:
+    name: hadoop-hdfs-zkfc
+    state: latest
+  when: '"master" in group_names'

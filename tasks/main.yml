@@ -1,0 +1,15 @@
+---
+- import_tasks: namenode.yml
+  tags: namenode,config
+  when: '"master" in group_names'
+
+- import_tasks: datanode.yml
+  tags: data,config
+  when: '"data" in group_names'
+
+- import_tasks: config.yml
+  tags: base,config
+
+- import_tasks: bootstrap.yml
+  when: hdfs_bootstrap and hdfs_ha_enabled
+  tags: bootstrap

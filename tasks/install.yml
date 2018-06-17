@@ -1,0 +1,24 @@
+---
+- name: 'install journalnodes'
+  yum:
+    name: hadoop-hdfs-journalnode
+    state: latest
+  when: '"master" in group_names'
+
+- name: 'install namenode'
+  yum:
+    name: hadoop-hdfs-namenode
+    state: latest
+  when: '"hdfs_namenodes" in group_names'
+
+- name: 'install hadoop-hdfs-zkfc'
+  yum:
+    name: hadoop-hdfs-zkfc
+    state: latest
+  when: '"master" in group_names'
+
+- name: 'install hdfs-data-node'
+  yum:
+    name: hadoop-hdfs-datanode
+    state: latest
+  when: '"data" in group_names'

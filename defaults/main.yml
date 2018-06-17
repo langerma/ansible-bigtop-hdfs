@@ -15,7 +15,13 @@ hdfs_dfs_journalnode_edits_dir_perm: "700"
 # Bootstraps the cluster ( Format namenodes, zkfc, journalnodes, start all services)
 # Please read the code before you activate this option.
 # Especially if you already have a hadoop setup in place.
-hdfs_bootstrap: False
+hdfs_bootstrap: True
+
+# Redistribute ssh keys every time?
+hdfs_redistribute_ssh_keys: False
+
+hdfs_parent_dir: /usr/local  # hadoop binaries will be copied here
+hdfs_ssh_known_hosts_file: "{{ hdfs_user_home }}/.ssh/known_hosts"
 
 # ------------------------------------------------------------------------------
 # Hadoop host variables

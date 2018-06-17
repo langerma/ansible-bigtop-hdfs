@@ -1,10 +1,4 @@
 ---
-- name: 'install hdfs-data-node'
-  yum:
-    name: hadoop-hdfs-datanode
-    state: latest
-  when: '"data" in group_names'
-
 - name: Create datanode directories
   file: path={{item}} state=directory owner={{hdfs_user}} group={{hdfs_group}} mode={{ hdfs_dfs_datanode_data_dir_perm }} mode=0700
   with_items: "{{ hdfs_datanode_dir_list }}"

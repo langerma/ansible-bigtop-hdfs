@@ -2,7 +2,7 @@
 # ------------------------------------------------------------------------------
 # General cluster settings
 # ------------------------------------------------------------------------------
-hdfs_cluster_name: cluster1
+hdfs_cluster_name: tsdb
 hdfs_user: hdfs
 hdfs_group: hadoop
 hdfs_user_home: "/var/lib/hadoop-hdfs"
@@ -18,7 +18,7 @@ hdfs_dfs_journalnode_edits_dir_perm: "700"
 hdfs_bootstrap: True
 
 # Redistribute ssh keys every time?
-hdfs_redistribute_ssh_keys: False
+hdfs_redistribute_ssh_keys: True
 
 hdfs_parent_dir: /usr/local  # hadoop binaries will be copied here
 hdfs_ssh_known_hosts_file: "{{ hdfs_user_home }}/.ssh/known_hosts"
@@ -81,7 +81,7 @@ hdfs_dfs_namenode_checkpoint_period: 3600
 # Ref: https://community.hortonworks.com/articles/43839/scaling-the-hdfs-namenode-part-2.html
 # -> for an average cluster 10-20 DNs the value 64 is a good average (for 32+ DNs -> 100+)
 hdfs_dfs_namenode_handler_count: 32
-hdfs_dfs_namenode_service_handler_count: "{{ (hdfs_dfs_namenode_handler_count / 2)|int}}"
+hdfs_dfs_namenode_service_handler_count: "{{ (hdfs_dfs_namenode_handler_count / 2)|int }}"
 hdfs_dfs_namenode_avoid_read_stale_datanode: true
 hdfs_dfs_namenode_avoid_write_stale_datanode: true
 hdfs_dfs_namenode_audit_log_async: false
@@ -100,7 +100,7 @@ hadoop_log_maxbackupindex: 20
 # HA specific setup
 # ------------------------------------------------------------------------------
 # Use ssh as fencing method (other option is shell(/bin/true)
-hdfs_ssh_fence: True
+hdfs_ssh_fence: False
 
 hdfs_ha_enabled: "{{hdfs_namenodes | count > 1}}"
 hdfs_default_fs: "hdfs://{{ hdfs_nameservices if hdfs_ha_enabled else hdfs_namenodes[0] + ':8020' }}"

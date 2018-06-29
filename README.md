@@ -1,5 +1,7 @@
 # ansible-bigtop-hdfs
 
+zookeeper must be in place and running --> see my zookeeper role
+
 ## example inventory
 ```ìni
 [master]
